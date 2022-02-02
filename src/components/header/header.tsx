@@ -29,6 +29,7 @@ const Header: React.FC<LayoutProps> = ({
   navItems,
   brandTitle,
   onSignInClick,
+  headerCtaContent,
 }) => {
   return (
     <header className="bg-indigo-600">
@@ -38,7 +39,7 @@ const Header: React.FC<LayoutProps> = ({
             <Brand brandTitle={brandTitle} logoSrc={logoSrc} />
             <Navigation navItems={navItems} isMobile={false} />
           </div>
-          <Cta onSignInClick={onSignInClick} />
+          <Cta>{headerCtaContent}</Cta>
         </div>
         <Navigation navItems={navItems} />
       </nav>

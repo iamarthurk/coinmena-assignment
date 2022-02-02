@@ -11,6 +11,7 @@ export interface LayoutProps {
   brandTitle: string;
   logoSrc: string;
   onSignInClick: () => void;
+  headerCtaContent: React.ReactElement;
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {

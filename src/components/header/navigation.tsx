@@ -1,6 +1,7 @@
 import React from 'react';
 import cntl from 'cntl';
 import { NavItem } from '../layout';
+import { Link } from 'react-router-dom';
 
 interface NavigationProps {
   isMobile?: boolean;
@@ -41,9 +42,9 @@ const Navigation: React.FC<NavigationProps> = ({
   return (
     <div className={navContainerClassName}>
       {navItems.map((link) => (
-        <a key={link.name} href={link.href} className={navItemClassName}>
+        <Link key={link.name} to={link.href} className={navItemClassName}>
           {link.name}
-        </a>
+        </Link>
       ))}
     </div>
   );

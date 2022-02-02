@@ -6,37 +6,8 @@ const containerClassName = cntl`
   space-x-4
 `;
 
-const signInButtonClassName = cntl`
-  inline-block
-  bg-indigo-500
-  py-2
-  px-4
-  border
-  border-transparent
-  rounded-md
-  text-base
-  font-medium
-  text-white
-  hover:bg-opacity-75
-`;
-
-interface CtaProps {
-  onSignInClick: () => void;
-}
-
-const Cta: React.FC<CtaProps> = ({ onSignInClick }) => {
-  const handleSignInClick = (evt: React.SyntheticEvent) => {
-    evt.preventDefault();
-    onSignInClick();
-  };
-
-  return (
-    <div className={containerClassName}>
-      <a href="#" onClick={handleSignInClick} className={signInButtonClassName}>
-        Sign in
-      </a>
-    </div>
-  );
+const Cta: React.FC = ({ children }) => {
+  return <div className={containerClassName}>{children}</div>;
 };
 
 export default Cta;

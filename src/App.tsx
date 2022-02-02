@@ -1,8 +1,19 @@
-import React from 'react';
+import { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/layout';
+import HeaderCta from './components/sign-in/header-cta';
+import SignInModal from './components/sign-in/modal';
+import { usePersistenceStrategy } from './hooks/usePersistUser';
+import { SignInFormValues } from './types';
+import { findUserByCredentials } from './utils';
+import data from './users.json';
 import logoSrc from './assets/logo.svg';
 
 export default function App() {
+  const [open, setOpen] = useState(false);
+  const [signInError, setSignInError] = useState<string | null>(null);
+  const { login } = usePersistenceStrategy();
+
   const navItems = [
     {
       name: 'Home',
@@ -15,17 +26,42 @@ export default function App() {
   ];
 
   const onSignInClick = () => {
-    console.log('Hey! trying to sign in');
+    setOpen(true);
+  };
+
+  const onCancelSignIn = () => {
+    setOpen(false);
+  };
+
+  const onSignIn = ({ username, password }: SignInFormValues) => {
+    const user = findUserByCredentials(data.users, username, password);
+
+    if (typeof user !== 'undefined') {
+      setOpen(false);
+      setSignInError(null);
+      login(user);
+    } else {
+      setSignInError('Something went wrong. Make sure to enter proper creds.');
+    }
   };
 
   return (
-    <Layout
-      onSignInClick={onSignInClick}
-      brandTitle="CoinMena"
-      logoSrc={logoSrc}
-      navItems={navItems}
-    >
-      This is layout content
-    </Layout>
+    <BrowserRouter>
+      <Layout
+        onSignInClick={onSignInClick}
+        brandTitle="CoinMena"
+        logoSrc={logoSrc}
+        navItems={navItems}
+        headerCtaContent={<HeaderCta onSignInClick={onSignInClick} />}
+      >
+        This is layout content
+      </Layout>
+      <SignInModal
+        signInError={signInError}
+        onSignIn={onSignIn}
+        open={open}
+        onCancel={onCancelSignIn}
+      />
+    </BrowserRouter>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface BrandProps {
   logoSrc: string;
@@ -7,10 +8,10 @@ interface BrandProps {
 
 const Brand: React.FC<BrandProps> = ({ logoSrc, brandTitle }) => {
   return (
-    <a href="#">
+    <Link to="/">
       <span className="sr-only">{brandTitle}</span>
       <img className="h-6 w-auto" src={logoSrc} alt="" />
-    </a>
+    </Link>
   );
 };
 
