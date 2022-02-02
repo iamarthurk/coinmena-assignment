@@ -1,12 +1,12 @@
 export interface User {
   id: string;
-  username: string;
+  email: string;
   password: string;
   name: string;
   picUrl: string;
 }
 
 export interface SignInFormValues {
-  username: string;
+  email: string;
   password: string;
 }

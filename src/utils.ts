@@ -6,8 +6,8 @@ export function findUserById(users: User[], id: string | null) {
 
 export function findUserByCredentials(
   users: User[],
-  username: string,
+  email: string,
   password: string,
 ) {
-  return users.find((u) => u.username === username && u.password === password);
+  return users.find((u) => u.email === email && u.password === password);
 }

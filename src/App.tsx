@@ -33,8 +33,8 @@ export default function App() {
     setOpen(false);
   };
 
-  const onSignIn = ({ username, password }: SignInFormValues) => {
-    const user = findUserByCredentials(data.users, username, password);
+  const onSignIn = ({ email, password }: SignInFormValues) => {
+    const user = findUserByCredentials(data.users, email, password);
 
     if (typeof user !== 'undefined') {
       setOpen(false);

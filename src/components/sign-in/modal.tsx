@@ -125,12 +125,12 @@ const SignInModal: React.FC<SignInModalProps> = ({
               </Dialog.Title>
               <div className="mt-2">
                 <LabeledInput
-                  id="username"
-                  type="text"
-                  label="Username"
-                  placeholder="Enter your username"
-                  errorMessage={errors.username?.message}
-                  {...register('username', { required: true })}
+                  id="email"
+                  type="email"
+                  label="E-mail"
+                  placeholder="Enter your e-mail"
+                  errorMessage={errors.email?.message}
+                  {...register('email', { required: true })}
                 />
                 <LabeledInput
                   id="password"
