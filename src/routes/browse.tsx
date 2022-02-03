@@ -44,11 +44,14 @@ const BrowseAssets: React.FC = () => {
 
     data?.pages.forEach((group: any) => {
       return group.data.forEach((item: any) => {
+        const rawPrice = item.metrics.market_data.price_usd;
+        const price = Math.round((rawPrice + Number.EPSILON) * 100) / 100;
+
         transformed.push({
           id: item.symbol,
           name: item.name,
           icon: `https://messari.io/asset-images/${item.id}/64.png?v=2`,
-          price: `$${Math.round(item.metrics.market_data.price_usd)}`,
+          price: `$${price}`,
         });
       });
     });
