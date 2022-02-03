@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClientProvider } from 'react-query';
 import Layout from './components/layout';
 import HeaderCta from './components/sign-in/header-cta';
 import SignInModal from './components/sign-in/modal';
@@ -8,6 +9,8 @@ import { SignInFormValues } from './types';
 import { findUserByCredentials } from './utils';
 import data from './users.json';
 import logoSrc from './assets/logo.svg';
+import queryClient from './query-client';
+import BrowseAssets from './routes/browse';
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -46,22 +49,26 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Layout
-        onSignInClick={onSignInClick}
-        brandTitle="CoinMena"
-        logoSrc={logoSrc}
-        navItems={navItems}
-        headerCtaContent={<HeaderCta onSignInClick={onSignInClick} />}
-      >
-        This is layout content
-      </Layout>
-      <SignInModal
-        signInError={signInError}
-        onSignIn={onSignIn}
-        open={open}
-        onCancel={onCancelSignIn}
-      />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Layout
+          onSignInClick={onSignInClick}
+          brandTitle="CoinMena"
+          logoSrc={logoSrc}
+          navItems={navItems}
+          headerCtaContent={<HeaderCta onSignInClick={onSignInClick} />}
+        >
+          <Routes>
+            <Route path="/" element={<BrowseAssets />} />
+          </Routes>
+        </Layout>
+        <SignInModal
+          signInError={signInError}
+          onSignIn={onSignIn}
+          open={open}
+          onCancel={onCancelSignIn}
+        />
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }

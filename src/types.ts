@@ -10,3 +10,11 @@ export interface SignInFormValues {
   email: string;
   password: string;
 }
+
+export interface CryptoAsset {
+  id: string;
+  price: string;
+  icon: string;
+  name: string;
+  [key: string]: string;
+}
